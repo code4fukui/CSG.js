@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html><head>
-  <script src="lightgl.js"></script>
-  <script src="../csg.js"></script>
-  <script src="gourd.js"></script>
-  <script src="viewer.js"></script>
   <style>
 
 body {
@@ -34,9 +30,12 @@ canvas { cursor: move; }
 
   </style>
 </head><body>
-  <h1>csg.js</h1>
-  <p><b>Source code:</b> <a href="http://github.com/evanw/csg.js/">http://github.com/evanw/csg.js/</a><br>
-    <b>Documentation:</b> <a href="http://evanw.github.com/csg.js/docs/">http://evanw.github.com/csg.js/docs/</a></p>
+  <h1>CSG.js</h1>
+  <p>
+    <b>Source code:</b> <a href="http://github.com/code4fukui/CSG.js/">http://github.com/code4fukui/CSG.js/</a><br>
+    <b>Documentation:</b> <a href="http://code4fukui.github.io/CSG.js/tests/">http://code4fukui.github.io/CSG.js/tests/</a><br>
+    <b>forked from:</b> <a href="https://github.com/evanw/csg.js/">evanw/csg.js</a><br>
+  </p>
 
   <h2>Issue Test Cases</h2>
   <p>These are test cases from GitHub issues.</p>
@@ -46,7 +45,10 @@ canvas { cursor: move; }
     </tr>
   </table>
 
-  <script>
+<script type="module">
+import { CSG } from "../CSG.js";
+import { Viewer, addViewer } from "./viewer.js";
+import { gourdModel } from "./gourd.js";
 
 // Test case from issue 1
 var a = CSG.cube();
