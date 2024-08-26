@@ -40,15 +40,18 @@ canvas { cursor: move; }
 </style>
 </head><body>
   <h1>CSG.js</h1>
-  <p><b>Source code:</b> <a href="http://github.com/evanw/csg.js/">http://github.com/evanw/csg.js/</a><br>
-    <b>Documentation:</b> <a href="http://evanw.github.com/csg.js/docs/">http://evanw.github.com/csg.js/docs/</a></p>
+  <p><b>Source code:</b> <a href="http://github.com/code4fukui/CSG.js/">http://github.com/code4fukui/CSG.js/</a><br>
+    <b>Documentation:</b> <a href="http://code4fukui.github.io/CSG.js/tests/">http://code4fukui.github.io/CSG.js/tests/</a></p>
+    <b>forked from:</b> <a href="https://github.com/evanw/csg.js/">evanw/csg.js</a></p>
 
   <h2>Introduction</h2>
   <p>Constructive Solid Geometry (CSG) is a modeling technique that uses Boolean operations like union and intersection to combine 3D solids. This library implements CSG operations on meshes elegantly and concisely using BSP trees, and is meant to serve as an easily understandable implementation of the algorithm. All edge cases involving overlapping coplanar polygons in both solids are correctly handled.</p>
   <p>Example usage:</p>
-  <pre>var cube = CSG.cube();
-var sphere = CSG.sphere({ radius: 1.3 });
-var polygons = cube.subtract(sphere).toPolygons();</pre>
+  <pre>import { CSG } from "https://code4fukui.github.io/CSG.js/CSG.js";
+
+const cube = CSG.cube();
+const sphere = CSG.sphere({ radius: 1.3 });
+const polygons = cube.subtract(sphere).toPolygons();</pre>
 
   <h2>Operations</h2>
   <p>This library provides three CSG operations: union, subtract, and intersect. The operations are rendered below using <a href="http://github.com/evanw/lightgl.js/">lightgl.js</a> and can be rotated by dragging the mouse if your browser supports WebGL.</p>
@@ -66,8 +69,8 @@ var polygons = cube.subtract(sphere).toPolygons();</pre>
     </tr>
   </table>
   <p>The solids <code>a</code> and <code>b</code> above were generated with the following code:</p>
-  <pre>var a = CSG.cube({ center: [-0.25, -0.25, -0.25] });
-var b = CSG.sphere({ radius: 1.3, center: [0.25, 0.25, 0.25] });</pre>
+  <pre>const a = CSG.cube({ center: [-0.25, -0.25, -0.25] });
+const b = CSG.sphere({ radius: 1.3, center: [0.25, 0.25, 0.25] });</pre>
 
   <h2>Combined CSG Example</h2>
   <p>Below is a solid constructed from a combination of operations:</p>
@@ -86,11 +89,11 @@ var b = CSG.sphere({ radius: 1.3, center: [0.25, 0.25, 0.25] });</pre>
     </tr>
   </table>
   <p>The solids above were generated with the following code:</p>
-  <pre>var a = CSG.cube();
-var b = CSG.sphere({ radius: 1.35, stacks: 12 });
-var c = CSG.cylinder({ radius: 0.7, start: [-1, 0, 0], end: [1, 0, 0] });
-var d = CSG.cylinder({ radius: 0.7, start: [0, -1, 0], end: [0, 1, 0] });
-var e = CSG.cylinder({ radius: 0.7, start: [0, 0, -1], end: [0, 0, 1] });</pre>
+  <pre>const a = CSG.cube();
+const b = CSG.sphere({ radius: 1.35, stacks: 12 });
+const c = CSG.cylinder({ radius: 0.7, start: [-1, 0, 0], end: [1, 0, 0] });
+const d = CSG.cylinder({ radius: 0.7, start: [0, -1, 0], end: [0, 1, 0] });
+const e = CSG.cylinder({ radius: 0.7, start: [0, 0, -1], end: [0, 0, 1] });</pre>
 
   <h2>Try it!</h2>
   <table>
@@ -99,8 +102,8 @@ var e = CSG.cylinder({ radius: 0.7, start: [0, 0, -1], end: [0, 0, 1] });</pre>
     </tr>
   </table>
   <p>Edit the code below to construct your own solids. A browser with WebGL is required to view the results. The <code>setColor(r, g, b)</code> function sets the color of the solid using values between 0 and 1 (just for display, not part of csg.js):</p>
-  <textarea id="tryit">var a = CSG.cube();
-var b = CSG.sphere({ radius: 1.35 });
+  <textarea id="tryit">const a = CSG.cube();
+const b = CSG.sphere({ radius: 1.35 });
 a.setColor(1, 1, 0);
 b.setColor(0, 0.5, 1);
 return a.subtract(b);
@@ -111,56 +114,61 @@ return a.subtract(b);
 import { CSG } from "../CSG.js";
 import { Viewer, addViewer } from "./viewer.js";
 
-// Test simple cases
-var a = CSG.cube({ center: [-0.25, -0.25, -0.25] });
-var b = CSG.sphere({ radius: 1.3, center: [0.25, 0.25, 0.25] });
-a.setColor(1, 0, 0);
-b.setColor(0, 0, 1);
-var operations = [
-  a,
-  b,
-  a.union(b),
-  a.subtract(b),
-  a.intersect(b)
-];
-for (var i = 0; i < operations.length; i++) {
-  addViewer(new Viewer(operations[i], 200, 200, 6));
+{
+  // Test simple cases
+  const a = CSG.cube({ center: [-0.25, -0.25, -0.25] });
+  const b = CSG.sphere({ radius: 1.3, center: [0.25, 0.25, 0.25] });
+  a.setColor(1, 0, 0);
+  b.setColor(0, 0, 1);
+  const operations = [
+    a,
+    b,
+    a.union(b),
+    a.subtract(b),
+    a.intersect(b)
+  ];
+  for (let i = 0; i < operations.length; i++) {
+    addViewer(new Viewer(operations[i], 200, 200, 6));
+  }
 }
 
-// Generate example from wikipedia
-var a = CSG.cube();
-var b = CSG.sphere({ radius: 1.35, stacks: 12 });
-var c = CSG.cylinder({ radius: 0.7, start: [-1, 0, 0], end: [1, 0, 0] });
-var d = CSG.cylinder({ radius: 0.7, start: [0, -1, 0], end: [0, 1, 0] });
-var e = CSG.cylinder({ radius: 0.7, start: [0, 0, -1], end: [0, 0, 1] });
-a.setColor(1, 0, 0);
-b.setColor(0, 0, 1);
-c.setColor(0, 1, 0);
-d.setColor(0, 1, 0);
-e.setColor(0, 1, 0);
-var operations = [
-  a,
-  b,
-  c,
-  d,
-  e,
-  a.intersect(b).subtract(c.union(d).union(e))
-];
-for (var i = 0; i < operations.length; i++) {
-  var size = i + 1 == operations.length ? 400 : 150;
-  addViewer(new Viewer(operations[i], size, size, 5));
+{
+  // Generate example from wikipedia
+  const a = CSG.cube();
+  const b = CSG.sphere({ radius: 1.35, stacks: 12 });
+  const c = CSG.cylinder({ radius: 0.7, start: [-1, 0, 0], end: [1, 0, 0] });
+  const d = CSG.cylinder({ radius: 0.7, start: [0, -1, 0], end: [0, 1, 0] });
+  const e = CSG.cylinder({ radius: 0.7, start: [0, 0, -1], end: [0, 0, 1] });
+  a.setColor(1, 0, 0);
+  b.setColor(0, 0, 1);
+  c.setColor(0, 1, 0);
+  d.setColor(0, 1, 0);
+  e.setColor(0, 1, 0);
+  const operations = [
+    a,
+    b,
+    c,
+    d,
+    e,
+    a.intersect(b).subtract(c.union(d).union(e))
+  ];
+  for (let i = 0; i < operations.length; i++) {
+    const size = i + 1 == operations.length ? 400 : 150;
+    addViewer(new Viewer(operations[i], size, size, 5));
+  }
 }
 
 // Set up interactive demo
-var tryit = document.getElementById('tryit');
-var timeout = null;
-var viewer = new Viewer(new CSG(), 400, 400, 5);
+const tryit = document.getElementById('tryit');
+const timeout = null;
+const viewer = new Viewer(new CSG(), 400, 400, 5);
 addViewer(viewer);
 function rebuild() {
-  var error = document.getElementById('error');
+  const error = document.getElementById('error');
+  let solid = null;
   try {
-    //var solid = new Function(tryit.value)();
-    var solid = eval(`(() => {${tryit.value}})()`);
+    //const solid = new Function(tryit.value)();
+    solid = eval(`(() => {${tryit.value}})()`);
     error.innerHTML = '';
   } catch (e) {
     error.innerHTML = 'Error: <code>' + e.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</code>';
