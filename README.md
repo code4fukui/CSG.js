@@ -1,4 +1,4 @@
-# csg.js
+# CSG.js
 
 ![](https://code4fukui.github.io/CSG.js/tests/images.png)
 
@@ -43,4 +43,4 @@ Subtraction and intersection naturally follow from set operations. If union is `
 
 # License
 
-Copyright (c) 2011 Evan Wallace (http://madebyevan.com/), under the [MIT license](http://www.opensource.org/licenses/mit-license.php).
+Copyright (c) 2011 Evan Wallace (https://madebyevan.com/), under the [MIT license](https://opensource.org/license/mit).
