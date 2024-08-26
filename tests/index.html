@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html><head>
-  <script src="lightgl.js"></script>
-  <script src="../csg.js"></script>
-  <script src="viewer.js"></script>
-  <style>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<style>
 
 body {
   font: 14px/20px 'Helvetica Neue Light', HelveticaNeue-Light, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -41,9 +37,9 @@ td { padding: 5px; text-align: center; }
 td code { background: none; border: none; color: inherit; }
 canvas { cursor: move; }
 
-  </style>
+</style>
 </head><body>
-  <h1>csg.js</h1>
+  <h1>CSG.js</h1>
   <p><b>Source code:</b> <a href="http://github.com/evanw/csg.js/">http://github.com/evanw/csg.js/</a><br>
     <b>Documentation:</b> <a href="http://evanw.github.com/csg.js/docs/">http://evanw.github.com/csg.js/docs/</a></p>
 
@@ -111,7 +107,9 @@ return a.subtract(b);
 </textarea>
   <p id="error"></p>
 
-  <script>
+<script type="module">
+import { CSG } from "../CSG.js";
+import { Viewer, addViewer } from "./viewer.js";
 
 // Test simple cases
 var a = CSG.cube({ center: [-0.25, -0.25, -0.25] });
@@ -161,7 +159,8 @@ addViewer(viewer);
 function rebuild() {
   var error = document.getElementById('error');
   try {
-    var solid = new Function(tryit.value)();
+    //var solid = new Function(tryit.value)();
+    var solid = eval(`(() => {${tryit.value}})()`);
     error.innerHTML = '';
   } catch (e) {
     error.innerHTML = 'Error: <code>' + e.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</code>';
@@ -171,9 +170,9 @@ function rebuild() {
 }
 tryit.onkeydown = function() {
   if (timeout) clearTimeout(timeout);
-  timeout = setTimeout(rebuild, 250);
+  timeout = setTimeout(rebuild, 50);
 };
 rebuild();
 
-  </script>
+</script>
 </body></html>

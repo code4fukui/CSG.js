@@ -1,3 +1,6 @@
+import { GL } from "./lightgl.js";
+import { CSG } from "../CSG.js";
+
 // Set the color of all polygons in this solid
 CSG.prototype.setColor = function(r, g, b) {
   this.toPolygons().map(function(polygon) {
@@ -34,7 +37,7 @@ Viewer.lineOverlay = false;
 
 // A viewer is a WebGL canvas that lets the user view a mesh. The user can
 // tumble it around by dragging the mouse.
-function Viewer(csg, width, height, depth) {
+export function Viewer(csg, width, height, depth) {
   viewers.push(this);
 
   // Get a new WebGL canvas
@@ -130,6 +133,6 @@ function Viewer(csg, width, height, depth) {
 }
 
 var nextID = 0;
-function addViewer(viewer) {
+export function addViewer(viewer) {
   document.getElementById(nextID++).appendChild(viewer.gl.canvas);
 }
