@@ -1,4 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<title>CSG.js</title>
 <style>
 
 body {
@@ -97,6 +98,7 @@ const c = CSG.cylinder({ radius: 0.7, start: [-1, 0, 0], end: [1, 0, 0] });
 const d = CSG.cylinder({ radius: 0.7, start: [0, -1, 0], end: [0, 1, 0] });
 const e = CSG.cylinder({ radius: 0.7, start: [0, 0, -1], end: [0, 0, 1] });</pre>
 
+<a id=tryit></a>
   <h2>Try it!</h2>
   <table>
     <tr>
@@ -162,7 +164,7 @@ import { Viewer, addViewer } from "./viewer.js";
 
 // Set up interactive demo
 const tryit = document.getElementById('tryit');
-const timeout = null;
+let timeout = null;
 const viewer = new Viewer(new CSG(), 400, 400, 5);
 addViewer(viewer);
 function rebuild() {
