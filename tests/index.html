@@ -106,7 +106,7 @@ const e = CSG.cylinder({ radius: 0.7, start: [0, 0, -1], end: [0, 0, 1] });</pre
     </tr>
   </table>
   <p>Edit the code below to construct your own solids. A browser with WebGL is required to view the results. The <code>setColor(r, g, b)</code> function sets the color of the solid using values between 0 and 1 (just for display, not part of csg.js):</p>
-  <textarea id="tryit">const a = CSG.cube();
+  <textarea id="tatryit">const a = CSG.cube();
 const b = CSG.sphere({ radius: 1.35 });
 a.setColor(1, 1, 0);
 b.setColor(0, 0.5, 1);
@@ -163,7 +163,7 @@ import { Viewer, addViewer } from "./viewer.js";
 }
 
 // Set up interactive demo
-const tryit = document.getElementById('tryit');
+const tryit = document.getElementById('tatryit');
 let timeout = null;
 const viewer = new Viewer(new CSG(), 400, 400, 5);
 addViewer(viewer);
